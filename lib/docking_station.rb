@@ -23,6 +23,12 @@ class DockingStation
       @bikes << bike
   end
 
+  def load_broken_bikes
+    broken_array = select_broken
+    @bikes -= select_broken
+    return broken_array
+  end
+
   private
 
   def full?
@@ -35,6 +41,10 @@ class DockingStation
 
   def select_working
     @bikes.select{|bike| bike.working?}
+  end
+
+  def select_broken
+    @bikes.reject{|bike| bike.working?}
   end
 
 end
